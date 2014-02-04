@@ -1,0 +1,17 @@
+
+
+<script src="http://connect.soundcloud.com/sdk.js"></script>
+<script>
+// initialize client with app credentials
+SC.initialize({
+  client_id: '8c32c9d9ea5b39e4fc3dc6669488c817',
+  redirect_uri: 'http://localhost:3000/connect'
+});
+
+// initiate auth popup
+SC.connect(function() {
+  SC.get('/me', function(me) { 
+    alert('Hello, ' + me.username); 
+  });
+});
+</script>
