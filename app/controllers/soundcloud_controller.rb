@@ -1,17 +1,21 @@
 class SoundcloudController < ApplicationController
 
+  CLIENT_ID = "8c32c9d9ea5b39e4fc3dc6669488c817"
+  CLIENT_SECRET = "18951d18fd3bf864e96fdbd2bf1b16fc"
+  REDIRECT_URI = "http://localhost:3000/scconnected"
+
   def connect
-    client = Soundcloud.new(:client_id => '8c32c9d9ea5b39e4fc3dc6669488c817',
-                            :client_secret => '18951d18fd3bf864e96fdbd2bf1b16fc',
-                            :redirect_uri => 'http://localhost:3000/connected')
+    client = Soundcloud.new(:client_id => CLIENT_ID,
+                            :client_secret => CLIENT_SECRET,
+                            :redirect_uri => REDIRECT_URI)
     redirect_to client.authorize_url()
   end
 
 
   def connected
-    my_client = Soundcloud.new(:client_id => '8c32c9d9ea5b39e4fc3dc6669488c817',
-                            :client_secret => '18951d18fd3bf864e96fdbd2bf1b16fc',
-                            :redirect_uri => 'http://localhost:3000/connected')
+    my_client = Soundcloud.new(:client_id => CLIENT_ID,
+                               :client_secret => CLIENT_SECRET,
+                               :redirect_uri => REDIRECT_URI)
     code = params[:code]
     tokens = my_client.exchange_token(:code => code)
 
@@ -22,14 +26,15 @@ class SoundcloudController < ApplicationController
     client = Soundcloud.new(:access_token => access_token)
     me = client.get('/me')
 
-    new_user = User.create(soundcloud_id: me.id,
-                           soundcloud_username: me.username,
-                           soundcloud_access_token: access_token,
-                           soundcloud_refresh_token: refresh_token,
-                           soundcloud_expires_at: expires_at)
+    new_user = User.find_or_create_by_soundcloud_id(me.id)
+    new_user.update_attributes(soundcloud_username: me.username,
+                               soundcloud_access_token: access_token,
+                               soundcloud_refresh_token: refresh_token,
+                               soundcloud_expires_at: expires_at)
     new_user.save
+    session[:user_id] = new_user.id
 
-    redirect_to finished_url
+    redirect_to connect_url
   end
 
 end

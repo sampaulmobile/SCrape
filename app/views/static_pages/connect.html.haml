@@ -1,0 +1,12 @@
+
+%h1 COnnect
+
+-if @sc_connected
+    SC CONNECTED!!!
+-else
+    =link_to "SC Connect", scconnect_url
+
+-if @db_connected
+    DB CONNECTED!!!
+-else
+    =link_to "DB Connect", dbconnect_url

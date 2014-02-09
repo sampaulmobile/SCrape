@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140123035326) do
+ActiveRecord::Schema.define(version: 20140207053740) do
 
   create_table "likes", force: true do |t|
     t.integer  "user_id"
@@ -42,8 +42,11 @@ ActiveRecord::Schema.define(version: 20140123035326) do
     t.boolean  "is_active",                default: true
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "dropbox_id"
+    t.string   "dropbox_access_token"
   end
 
+  add_index "users", ["dropbox_id"], name: "index_users_on_dropbox_id", unique: true
   add_index "users", ["soundcloud_id"], name: "index_users_on_soundcloud_id", unique: true
 
 end

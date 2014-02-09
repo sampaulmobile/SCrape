@@ -8,6 +8,17 @@ gem 'sqlite3'
 
 gem 'haml'
 gem 'soundcloud'
+gem 'dropbox-sdk'
+
+gem 'open_uri_redirections'
+
+# Unicorn Web Server
+gem 'unicorn'
+ 
+# Deploy with Capistrano
+gem 'capistrano'
+# Capistrano RVM integration
+gem 'rvm-capistrano'
 
 gem 'sidekiq', require: 'sidekiq/web'
 gem 'sinatra', require: false

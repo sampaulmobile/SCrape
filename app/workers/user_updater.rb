@@ -12,8 +12,6 @@ class UserUpdater
 
       tracks = client.get('/me/favorites', offset: page_size * i)
       tracks.each do |track|
-        Rails.logger.debug "THIS IS #{track.title}"
-
         if !Like.where(track_id: track.id, user_id: user.id).blank?
           finished = true
           break 
@@ -36,7 +34,10 @@ class UserUpdater
         l = Like.create(track_id: track.id, user_id: user.id)
         l.save
 
-        TrackDownloader.perform_async(download_url, user.soundcloud_username, title)
+        TrackDownloader.perform_async(download_url, 
+                                      title, 
+                                      user.soundcloud_username, 
+                                      user.dropbox_access_token)
       end 
 
       break if finished

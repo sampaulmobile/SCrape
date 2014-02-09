@@ -9,7 +9,10 @@ class Like < ActiveRecord::Base
   end
 
   def download
-    TrackDownloader.perform_async(self.id, self.user_id, self.track_id)
+    TrackDownloader.perform_async(self.id, 
+                                  self.track.title,
+                                  self.user.soundcloud_username, 
+                                  self.user.dropbox_access_token)
   end
 
 end
