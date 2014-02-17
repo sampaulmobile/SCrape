@@ -1,13 +1,13 @@
-set :application, "set your application name here"
-set :repository,  "set your repository location here"
+# set :application, "SCrape"
+# set :repository,  "git@github.com:sampaulmobile/SCrape.git"
 
-# set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
+#set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 
-role :web, "your web-server here"                          # Your HTTP server, Apache/etc
-role :app, "your app-server here"                          # This may be the same as your `Web` server
-role :db,  "your primary db-server here", :primary => true # This is where Rails migrations will run
-role :db,  "your slave db-server here"
+# role :web, "your web-server here"                          # Your HTTP server, Apache/etc
+# role :app, "your app-server here"                          # This may be the same as your `Web` server
+# role :db,  "your primary db-server here", :primary => true # This is where Rails migrations will run
+# role :db,  "your slave db-server here"
 
 # if you want to clean up old releases on each deploy uncomment this:
 # after "deploy:restart", "deploy:cleanup"
@@ -34,23 +34,23 @@ require "bundler/capistrano"
 require "rvm/capistrano"
  
 # Application name
-set :application, "myapp"
+set :application, "SCrape"
  
 # Application environment
 set :rails_env, :production
  
 # Deploy username and sudo username
 set :user, "ec2-user"
-set :user_rails, "rails"
+set :user_rails, "www"
  
 # App Domain
-set :domain, "myapp.com"
+set :domain, "ec2-54-84-64-142.compute-1.amazonaws.com"
  
 # We don't want to use sudo (root) - for security reasons
 set :use_sudo, false
  
 # Target ruby version
-set :rvm_ruby_string, '1.9.3'
+set :rvm_ruby_string, '2.0.0'
  
 # System-wide RVM installation
 set :rvm_type, :system
@@ -62,14 +62,14 @@ set :rvm_install_with_sudo, true
 set :scm, :git
  
 # Use github repository
-set :repository, "git://github.com/myuser/myapp.git"
+set :repository,  "git@github.com:sampaulmobile/SCrape.git"
  
 # master is our default git branch
 set :branch, "master"
  
 # Deploy via github
 set :deploy_via, :remote_cache
-set :deploy_to, "/var/rails/#{application}"
+set :deploy_to, "/var/www/#{application}"
  
 # We have all components of the app on the same server
 server domain, :app, :web, :db, :primary => true
