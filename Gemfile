@@ -20,6 +20,10 @@ gem 'capistrano'
 # Capistrano RVM integration
 gem 'rvm-capistrano'
 
+gem "resque", require: 'resque/server'
+gem 'resque-scheduler'
+gem 'resque-pool'
+
 gem 'sidekiq', require: 'sidekiq/web'
 gem 'sinatra', require: false
 gem 'slim'

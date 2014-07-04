@@ -11,4 +11,9 @@ class StaticPagesController < ApplicationController
   def finished
   end
 
+  def reset
+      reset_session
+      redirect_to root_url
+  end
+
 end

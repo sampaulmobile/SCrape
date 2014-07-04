@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20140207053740) do
     t.string   "title"
     t.string   "download_url",   default: ""
     t.integer  "download_count", default: 0
+    t.integer  "duration",       default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end

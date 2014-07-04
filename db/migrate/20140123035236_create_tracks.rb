@@ -6,6 +6,7 @@ class CreateTracks < ActiveRecord::Migration
       t.string :title
       t.string :download_url, default: ""
       t.integer :download_count, default: 0
+      t.integer :duration, default: 0
 
       t.timestamps
     end

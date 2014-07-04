@@ -4,4 +4,4 @@ require File.expand_path('../application', __FILE__)
 # Initialize the Rails application.
 SCrape::Application.initialize!
 
-Rails.logger = Logger.new('log.txt')
+Rails.logger = Logger.new("#{Rails.env}_log.txt")
